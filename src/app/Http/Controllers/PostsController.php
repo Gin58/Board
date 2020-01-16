@@ -39,4 +39,26 @@ class PostsController extends Controller
             'post' => $post,
         ]);
     }
+
+    public function edit($post_id)
+    {
+        $post = Post::findOrFail($post_id);
+
+        return view('posts.edit',[
+            'post' => $post,
+        ]);
+    }
+
+    public function update($post_id, Request $request)
+    {
+        $params = $request->validate([
+            'title' => 'required|max:20',
+            'body' => 'required|max:200',
+        ]);
+
+        $post = Post::findOrFail($post_id);
+        $post->fill($params)->save();
+
+        return redirect()->route('posts.show', ['post' => $post]);
+    }
 }
