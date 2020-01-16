@@ -11,6 +11,9 @@
             <div class="card mb-4">
                 <div class="card-header">
                     {{ $post->title }}
+                    @if ($post->user_id === Auth::id())
+                        <span style="float: right;">Your Post</span>
+                    @endif
                 </div>
                 <div class="card-body">
                     <p class="card-text">
