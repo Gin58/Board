@@ -20,7 +20,7 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::group(['middleware' => 'auth'], function() {
-    Route::resource('posts', 'PostsController', ['only' => ['index', 'create', 'store']]);
+    Route::resource('posts', 'PostsController', ['only' => ['index', 'create', 'store', 'show']]);
 });
 
 Route::group(['prefix' => 'admin'], function () {
