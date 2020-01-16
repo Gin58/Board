@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Post;
+use App\Http\Requests\CreatePost;
 
 class PostsController extends Controller
 {
@@ -21,12 +22,13 @@ class PostsController extends Controller
 
     public function store(Request $request)
     {
-        $params = $request->validate([
-            'title' => 'required|max:20',
-            'body' => 'required|max: 200',
-        ]);
 
-        Post::create($params);
+        $post = new Post();
+        $post->title = $request->title;
+        $post->body = $request->body;
+        $post->user_id = \Auth::user()->id;
+
+        $post->save();
 
         return redirect()->route('posts.index');
     }
