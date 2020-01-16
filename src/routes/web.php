@@ -20,7 +20,7 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::group(['middleware' => 'auth'], function() {
-    Route::resource('posts', 'PostsController', ['only' => ['index', 'create', 'store', 'show', 'edit', 'update']]);
+    Route::resource('posts', 'PostsController');
     Route::resource('comments', 'CommentsController', ['only' => ['store']]);
 });
 
